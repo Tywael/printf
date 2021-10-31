@@ -3,16 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahuber <marvin@42lausanne.ch>              +#+  +:+       +#+         #
+#    By: yalthaus <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/10/26 09:31:22 by ahuber            #+#    #+#              #
-#    Updated: 2021/10/26 11:23:53 by ahuber           ###   ########.fr        #
+#    Created: 2021/10/28 11:53:02 by yalthaus          #+#    #+#              #
+#    Updated: 2021/10/31 17:04:20 by yalthaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRC = ft_printf.c ft_printf_utils.c ft_printf_utils2.c
+SRC =	ft_printf.c\
+		ft_printf_utils.c\
+		ft_printf_int.c\
+		ft_printf_char.c\
+		ft_printf_str.c\
+		ft_printf_hex.c\
+		ft_printf_unsigned.c
 
 OBJ = ${SRC:.c=.o}
 

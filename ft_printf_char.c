@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_printf_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yalthaus <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/31 16:50:41 by yalthaus          #+#    #+#             */
-/*   Updated: 2021/10/31 16:54:29 by yalthaus         ###   ########.fr       */
+/*   Created: 2021/10/31 15:04:07 by yalthaus          #+#    #+#             */
+/*   Updated: 2021/10/31 16:44:50 by yalthaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_strlen(const char *str)
+int	ft_print_char(int c)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	c = c & 0xff;
+	write (1, &c, 1);
+	return (1);
 }

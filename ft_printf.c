@@ -6,83 +6,66 @@
 /*   By: ahuber <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 09:06:54 by ahuber            #+#    #+#             */
-/*   Updated: 2021/10/27 15:48:43 by ahuber           ###   ########.fr       */
+/*   Updated: 2021/10/31 17:42:53 by yalthaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-void	print_var(const char *to_print, va_list args, int i)
+int	ft_print_arg(char *str, va_list args)
 {
-	if (to_print[i + 1] == 's')
-		ft_putstr((char *)va_arg(args, const char *));
-	else if (to_print[i + 1] == 'c')
-		ft_putchar_count((int)va_arg(args, int));
-	else if (to_print[i + 1] == 'i' || to_print[i + 1] == 'd')
-		ft_putnbr((int)va_arg(args, int));
-	else if (to_print[i + 1] == '%')
-		ft_putchar_count('%');
-	else if (to_print[i + 1] == 'x')
-		ft_putstr(ft_itoa_base_x(va_arg(args, int), 16));
-	else if (to_print[i + 1] == 'X')
-		ft_putstr(ft_str_toupper(ft_itoa_base_x(va_arg(args, int), 16)));
-	else if (to_print[i + 1] == 'u')
-		ft_putnbr_long((unsigned int)va_arg(args, unsigned int));
-	else if (to_print[i + 1] == 'p')
+	if (*str == '%')
 	{
-		ft_putstr("0x");
-		ft_putstr(ft_itoa_base((unsigned long int)va_arg(args, void *), 16));
+		write(1, "%", 1);
+		return (1);
 	}
+	else if (*str == 'c')
+		return (ft_print_char(va_arg(args, int)));
+	else if (*str == 's')
+		return (ft_print_str(va_arg(args, char *)));
+	//else if (*str == 'p')
+	//	return (ft_print_ptr(va_arg(args, char *)));
+	else if (*str == 'd')
+		return (ft_print_int(va_arg(args, int)));
+	else if (*str == 'i')
+		return (ft_print_int(va_arg(args, int)));
+	else if (*str == 'u')
+		return (ft_print_unsigned(va_arg(args, unsigned int)));
+	else if (*str == 'x')
+		return (ft_print_hex(va_arg(args, int), 0));
+	else if (*str == 'X')
+		return (ft_print_hex(va_arg(args, int), 1));\
+	return (0);
 }
 
-int	ft_printf(const char *to_print, ...)
+int	ft_printf(const char *str, ...)
 {
 	int		i;
+	int		count;
 	va_list	args;
+	char	*s;
 
-	va_start (args, to_print);
+	s = (char *)str;
+	va_start (args, str);
 	i = 0;
-	if (!to_print)
+	count = 0;
+	if (!s)
 		return (0);
-	while (to_print[i])
+	while (s[i])
 	{
-		if (to_print[i] != '%')
-			ft_putchar_count(to_print[i]);
-		else
+		if (s[i] == '%')
 		{
-			print_var(to_print, args, i);
-			i++;
+			write(1, s, i);
+			count += i;
+			s += i;
+			i = 0;
+			count += ft_print_arg(s + 1, args);
 		}
 		i++;
 	}
+	write(1, s, i);
 	va_end(args);
-	return (g_count);
+	return (count);
 }
 
-/*int main()
-{
-	const char	*text;
-	const char	*lettre;
-	int			nombre;
-	int			nombre2;
-	unsigned int			nombre3;
-	int			nombre4;
-	int	printfc;
-	void *ptr;
-
-	text = "ft_tagueule";
-	lettre = "c";
-	nombre = 42;
-	nombre2 = 43;
-	nombre3 = 42;
-	nombre4 = -1;
-	printfc = 0;
-	ptr = &nombre;
-
-	ft_printf("Result = %p\n", ptr);
-	printf("Result = %p\n", ptr);
-
-	//printf("N lettre: %d\n", count);
-	//printf("Printf: %d\n", printfc);
-	//	printf("Real: %x + %X", nombre3, nombre3);
-}*/
