@@ -6,7 +6,7 @@
 /*   By: yalthaus <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 11:53:41 by yalthaus          #+#    #+#             */
-/*   Updated: 2021/10/31 16:48:43 by yalthaus         ###   ########.fr       */
+/*   Updated: 2021/11/04 19:13:02 by yalthaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 int	ft_putHEX(int n)
 {
-	int	i;
 	int	tmp;
 	int	count;
+	int	i;
 
-	count = 0;
 	i = 4;
+	count = 0;
 	while (i--)
 	{
-		tmp = (n) >> (i * 4);
-		tmp = tmp & 0xff;
+		printf("hex: %x\n", n);
+		tmp = ((n) >> (i * sizeof(int))) & 0xf;
 		if (count || tmp)
 		{
+			printf("nbr :%i\n", tmp);
 			write(1, &"0123456789ABCDEF"[tmp], 1);
 			count++;
 		}

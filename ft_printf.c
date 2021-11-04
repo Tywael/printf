@@ -6,7 +6,7 @@
 /*   By: ahuber <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 09:06:54 by ahuber            #+#    #+#             */
-/*   Updated: 2021/10/31 17:42:53 by yalthaus         ###   ########.fr       */
+/*   Updated: 2021/11/04 18:05:37 by yalthaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ int	ft_printf(const char *str, ...)
 		{
 			write(1, s, i);
 			count += i;
-			s += i;
+			count += ft_print_arg(s + i + 1, args);
+			s += i + 2;
 			i = 0;
-			count += ft_print_arg(s + 1, args);
 		}
 		i++;
 	}
+	count += i;
 	write(1, s, i);
 	va_end(args);
 	return (count);
