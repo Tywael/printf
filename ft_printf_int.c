@@ -6,7 +6,7 @@
 /*   By: yalthaus <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 11:53:41 by yalthaus          #+#    #+#             */
-/*   Updated: 2021/10/31 17:34:36 by yalthaus         ###   ########.fr       */
+/*   Updated: 2021/11/05 16:46:18 by yalthaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	ft_print_int(int n)
 	int i;
 
 	i = 0;
+	if (n == 0)
+		return (write(1, "0", 1));
 	ft_putnbr(n);
 	if (n < 0)
 		i++;

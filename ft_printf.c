@@ -6,7 +6,7 @@
 /*   By: ahuber <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 09:06:54 by ahuber            #+#    #+#             */
-/*   Updated: 2021/11/04 18:05:37 by yalthaus         ###   ########.fr       */
+/*   Updated: 2021/11/05 17:39:02 by yalthaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,13 @@
 int	ft_print_arg(char *str, va_list args)
 {
 	if (*str == '%')
-	{
-		write(1, "%", 1);
-		return (1);
-	}
+		return (write(1, "%", 1));
 	else if (*str == 'c')
 		return (ft_print_char(va_arg(args, int)));
 	else if (*str == 's')
 		return (ft_print_str(va_arg(args, char *)));
-	//else if (*str == 'p')
-	//	return (ft_print_ptr(va_arg(args, char *)));
+	else if (*str == 'p')
+		return (ft_print_ptr(va_arg(args, void *)));
 	else if (*str == 'd')
 		return (ft_print_int(va_arg(args, int)));
 	else if (*str == 'i')
@@ -35,7 +32,7 @@ int	ft_print_arg(char *str, va_list args)
 	else if (*str == 'x')
 		return (ft_print_hex(va_arg(args, int), 0));
 	else if (*str == 'X')
-		return (ft_print_hex(va_arg(args, int), 1));\
+		return (ft_print_hex(va_arg(args, int), 1));
 	return (0);
 }
 
@@ -52,20 +49,17 @@ int	ft_printf(const char *str, ...)
 	count = 0;
 	if (!s)
 		return (0);
-	while (s[i])
+	while (s[i] != '\0')
 	{
 		if (s[i] == '%')
 		{
-			write(1, s, i);
-			count += i;
-			count += ft_print_arg(s + i + 1, args);
+			count += write(1, s, i) + ft_print_arg(s + i + 1, args);
 			s += i + 2;
-			i = 0;
+			i = -1;
 		}
 		i++;
 	}
-	count += i;
-	write(1, s, i);
+	count += write(1, s, i);
 	va_end(args);
 	return (count);
 }

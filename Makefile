@@ -6,7 +6,7 @@
 #    By: yalthaus <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/28 11:53:02 by yalthaus          #+#    #+#              #
-#    Updated: 2021/10/31 17:04:20 by yalthaus         ###   ########.fr        #
+#    Updated: 2021/11/05 17:39:34 by yalthaus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRC =	ft_printf.c\
 		ft_printf_char.c\
 		ft_printf_str.c\
 		ft_printf_hex.c\
-		ft_printf_unsigned.c
+		ft_printf_unsigned.c\
+		ft_printf_ptr.c
 
 OBJ = ${SRC:.c=.o}
 
